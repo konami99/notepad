@@ -1,14 +1,23 @@
 version: '3.9'
 services:
+  notepad-nextjs:
+    container_name: notepad-nextjs
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    build:
+      context: ./nextjs/
+    depends_on:
+      - notepad-rest-api
   notepad-rest-api:
     container_name: notepad-rest-api
     restart: unless-stopped
     environment:
       - NODE_ENV=dev
     ports:
-      - '3000:3000'
+      - '3100:3000'
     build:
-      context: ./
+      context: ./express/
     depends_on:
       - notepad-mongodb
   notepad-mongodb:
@@ -17,8 +26,8 @@ services:
     ports:
       - '27017-27019:27017-27019'
     volumes:
-      - ./mongo-volume:/data/db
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./express/mongo-volume:/data/db
+      - ./express/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example

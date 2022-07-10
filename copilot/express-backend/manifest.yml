@@ -13,6 +13,7 @@ http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
   path: '/express-backend'
+  healthcheck: '/healthcheck'
 network:
   vpc:
     placement: private

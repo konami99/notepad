@@ -18,6 +18,7 @@ phases:
       # - make test
   post_build:
     commands:
+      - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - ls -l
       - export COLOR="false"
       # First, upgrade the cloudformation stack of every environment in the pipeline.

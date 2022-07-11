@@ -1,14 +1,5 @@
 version: '3.9'
 services:
-  notepad-nextjs:
-    container_name: notepad-nextjs
-    restart: unless-stopped
-    ports:
-      - '3000:3000'
-    build:
-      context: ./nextjs/
-    depends_on:
-      - notepad-rest-api
   notepad-rest-api:
     container_name: notepad-rest-api
     restart: unless-stopped
@@ -16,8 +7,11 @@ services:
       - NODE_ENV=dev
     ports:
       - '3100:3000'
+    volumes:
+      - ./express:/src
     build:
       context: ./express/
+    command: npm run dev
     depends_on:
       - notepad-mongodb
   notepad-mongodb:

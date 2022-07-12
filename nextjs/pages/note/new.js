@@ -3,11 +3,40 @@ import { Controller, useForm } from 'react-hook-form';
 import Input from "@material-ui/core/Input";
 import * as React from 'react';
 import { Box } from "@mui/system";
+import useSWR from 'swr';
+
+
 
 export default function create() {
-  const { register, control, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const { register, control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      nameRequired: '',
+      emailRequired: ''
+    }
+  });
 
+  const fetcher = (url) => fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({email: postData.emailRequired, name: postData.nameRequired})
+  }).then((res) => res.json());
+
+  const [postData, setPostData] = React.useState(null);
+
+  const { data, error } = useSWR(
+    postData ? `${process.env.NEXT_PUBLIC_EXPRESS_ENDPOINT}/api/users` : null,
+    fetcher
+  );
+
+  const onSubmit = data => {
+    console.log(data);
+    setPostData(data);
+  };
+
+  if (error) return "An error has occurred.";
   return (
     <div className="container">
       <Head>

@@ -4,11 +4,17 @@ import Input from "@material-ui/core/Input";
 import * as React from 'react';
 import { Box } from "@mui/system";
 import useSWR from 'swr';
-
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
 export default function create() {
+  const validationSchema = Yup.object().shape({
+    nameRequired: Yup.string().max(6, 'Name must be at most 6 characters').required('Name is required'),
+    emailRequired: Yup.string().required('Email is required').email('Email is invalid'),
+  });
+
   const { register, control, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       nameRequired: '',
       emailRequired: ''
@@ -22,7 +28,10 @@ export default function create() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({email: postData.emailRequired, name: postData.nameRequired})
-  }).then((res) => res.json());
+  }).then((res) => {
+    setPostData(null);
+    return res.json();
+  });
 
   const [postData, setPostData] = React.useState(null);
 
@@ -32,7 +41,6 @@ export default function create() {
   );
 
   const onSubmit = data => {
-    console.log(data);
     setPostData(data);
   };
 
@@ -49,19 +57,17 @@ export default function create() {
             <Controller
               name='nameRequired'
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => <Input{...field} />}
+              render={({ field }) => <Input{...field} placeholder="Name" />}
             />
-            {errors.nameRequired && <span>Name is required</span>}
+            {errors.nameRequired && <span>{errors.nameRequired?.message}</span>}
           </Box>  
           <Box component="span" sx={{ display: 'block' }}>
             <Controller
               name='emailRequired'
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => <Input{...field} />}
+              render={({ field }) => <Input{...field} placeholder="Email" />}
             />
-            {errors.emailRequired && <span>Email is required</span>}
+            {errors.emailRequired && <span>{errors.emailRequired?.message}</span>}
           </Box>
           <Box component="span" sx={{ display: 'block' }}>
             <input type="submit" />

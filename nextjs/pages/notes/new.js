@@ -36,7 +36,7 @@ export default function create() {
   const [postData, setPostData] = React.useState(null);
 
   const { data, error } = useSWR(
-    postData ? 'http://express-backend.prod.notepad.local/api/users' : null,
+    postData ? 'http://zexpress-backend.prod.notepad.local/api/users' : null,
     fetcher
   );
 

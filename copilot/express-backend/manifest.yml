@@ -12,7 +12,7 @@ type: Backend Service
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: '/express-backend'
+  path: '/'
   healthcheck: '/healthcheck'
 network:
   vpc:

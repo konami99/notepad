@@ -1,28 +1,28 @@
-# The manifest for the "express" service.
+# The manifest for the "backend" service.
 # Read the full specification for the "Load Balanced Web Service" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
 
 # Your service name will be used in naming your resources like log groups, ECS services, etc.
-name: express
+name: backend
 type: Load Balanced Web Service
 
 # Distribute traffic to your service.
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: '/express'
+  path: '/'
   # You can specify a custom health check path. The default is "/".
   healthcheck: '/healthcheck'
 
 # Configuration for your containers and service.
 image:
   # Docker build arguments. For additional overrides: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#image-build
-  build: ./express/Dockerfile
+  build: Dockerfile
   # Port exposed through your container to route traffic to it.
-  port: 3000
+  port: 80
 
 cpu: 512       # Number of CPU units for the task.
-memory: 2048    # Amount of memory in MiB used by the task.
+memory: 1024    # Amount of memory in MiB used by the task.
 count: 1       # Number of tasks that should be running in your service.
 exec: true     # Enable running commands in your container.
 secrets:

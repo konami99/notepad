@@ -6,17 +6,17 @@ import { createUserHandler } from "./controllers/user.controller";
 import requireUser from "./middleware/requireUser";
 
 function routes(app: Express) {
-  app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
+  app.get("/express/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
 
-  app.post("/api/users", createUserHandler);
+  app.post("/express/api/users", createUserHandler);
 
   app.post(
-    "/api/sessions",
+    "/express/api/sessions",
     createUserSessionHandler,
   )
 
   app.post(
-    "/api/notes",
+    "/express/api/notes",
     requireUser,
     createNoteHandler,
   )

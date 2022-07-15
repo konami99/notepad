@@ -36,7 +36,7 @@ export default function create() {
   const [postData, setPostData] = React.useState(null);
 
   const { data, error } = useSWR(
-    postData ? 'http://express.prod.notepad.local/api/users' : null,
+    postData ? 'http://notep-Publi-1SYA2LSFWI0KN-477544691.us-west-2.elb.amazonaws.com/express/api/users' : null,
     fetcher
   );
 

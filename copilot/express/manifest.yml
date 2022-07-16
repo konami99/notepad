@@ -25,7 +25,8 @@ cpu: 512       # Number of CPU units for the task.
 memory: 1024    # Amount of memory in MiB used by the task.
 count: 1       # Number of tasks that should be running in your service.
 exec: true     # Enable running commands in your container.
-ACCESS_TOKEN_PRIVATE_KEY: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/ACCESS_TOKEN_PRIVATE_KEY
+secrets:
+  ACCESS_TOKEN_PRIVATE_KEY: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/ACCESS_TOKEN_PRIVATE_KEY
   ACCESS_TOKEN_PUBLIC_KEY: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/ACCESS_TOKEN_PUBLIC_KEY
   DB_URI: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/DB_URI
   PORT: /copilot/${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/secrets/PORT

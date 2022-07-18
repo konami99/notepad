@@ -15,3 +15,7 @@ export async function createUser({email, name}: UserInput) {
 export async function findUser(query: FilterQuery<UserDocument>) {
   return UserModel.findOne(query).lean();
 }
+
+export async function getUsers() {
+  return UserModel.find();
+}

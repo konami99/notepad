@@ -26,3 +26,14 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGO_INITDB_DATABASE=mongo-dev
+  faktory:
+    image: contribsys/faktory:1.6.1
+    container_name: faktory
+    ports:
+      - '7419-7420:7419-7420'
+    volumes:
+      - ./express/faktory-data:/var/lib/faktory
+      - ./express/faktory-config:/etc/faktory
+    environment:
+      - FAKTORY_ENV=staging
+      - FAKTORY_PASSWORD=12345

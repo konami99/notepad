@@ -104,5 +104,7 @@ dist
 .tern-port
 
 mongo-volume
+faktory-data
+faktory-config
 
 .DS_Store

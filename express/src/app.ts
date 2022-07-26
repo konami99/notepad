@@ -8,6 +8,8 @@ import routes from "./routes";
 import { resourceLimits } from "worker_threads";
 import deserializeUser from "./middleware/deserializeUser";
 import createServer from "./utils/server";
+import faktory, { JobFunction } from "faktory-worker";
+import { Worker } from "threads";
 
 const myEnv = dotenv.config();
 dotenvExpand.expand(myEnv);
@@ -15,6 +17,8 @@ dotenvExpand.expand(myEnv);
 const port = parseInt(process.env.PORT as string);
 const app = createServer();
 
+
 app.listen(port, async () => {
   await connect();
+  new Worker('./worker.ts');
 });

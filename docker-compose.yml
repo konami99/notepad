@@ -9,6 +9,7 @@ services:
       - '3100:3000'
     volumes:
       - ./express:/src
+      - /src/node_modules
     build:
       context: ./express/
     command: npm run dev

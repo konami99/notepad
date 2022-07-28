@@ -20,5 +20,5 @@ const app = createServer();
 
 app.listen(port, async () => {
   await connect();
-  new Worker('./worker.ts');
+  //new Worker('./worker.ts');
 });

@@ -5,21 +5,17 @@ import faktory from "faktory-worker";
 
 export async function createUser({email, name}: UserInput) {
   try {
-    const user = await UserModel.create({email, name});
-
-    
-
     const client = await faktory.connect({
-      host: "faktory",
+      host: "faktory.prod2.notepad.local",
       port: 7419,
       password: '12345',
       labels: [],
     })
-    console.log('here');
-
+    console.log('ResizeImage');
     await client.job("ResizeImage", { id: 399, size: "thumb" }).push();
     await client.close();
     
+    const user = await UserModel.create({email, name});
     return user.toJSON();
   } catch (e: any) {
     throw new Error(e);

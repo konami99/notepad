@@ -6,6 +6,8 @@ ADD package-lock.json /tmp/package-lock.json
 
 RUN rm -rf build
 
+ENV NODE_ENV=production
+
 RUN cd /tmp && npm install
 
 ADD ./ /src

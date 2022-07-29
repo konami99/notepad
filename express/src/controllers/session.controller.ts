@@ -8,7 +8,7 @@ import { signJwt } from "../utils/jwt.utils";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   const user = await UserModel.findOne({ email: req.body.email });
-
+  /*
   if (!user) {
     return res.status(401).send("Invalid email or password");
   }
@@ -20,4 +20,5 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   )
 
   return res.send({ accessToken });
+  */
 }

@@ -107,4 +107,6 @@ mongo-volume
 faktory-data
 faktory-config
 
+express/build
+
 .DS_Store

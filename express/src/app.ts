@@ -5,11 +5,9 @@ import config from "config";
 import responseTime from "response-time";
 import connect from "./utils/connect";
 import routes from "./routes";
-import { resourceLimits } from "worker_threads";
 import deserializeUser from "./middleware/deserializeUser";
 import createServer from "./utils/server";
 import faktory, { JobFunction } from "faktory-worker";
-import { Worker } from "threads";
 
 const myEnv = dotenv.config();
 dotenvExpand.expand(myEnv);
@@ -20,5 +18,4 @@ const app = createServer();
 
 app.listen(port, async () => {
   await connect();
-  new Worker('./worker');
 });

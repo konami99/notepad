@@ -51,8 +51,4 @@ services:
     environment:
       - FAKTORY_ENV=staging
       - FAKTORY_PASSWORD=12345
-  elasticmq:
-    image: softwaremill/elasticmq
-    container_name: elasticmq
-    ports:
-      - '9324:9324'
+  

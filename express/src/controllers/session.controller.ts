@@ -8,17 +8,17 @@ import { signJwt } from "../utils/jwt.utils";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   const user = await UserModel.findOne({ email: req.body.email });
-  /*
+
   if (!user) {
     return res.status(401).send("Invalid email or password");
   }
 
   const session = await createSession(user._id, req.get("user-agent") || "");
+  const userJson = user.toJSON();
   const accessToken = signJwt(
-    { ...user.toJSON(), session: session._id },
+    { ...userJson, session: session._id },
     { expiresIn: '15m' }
   )
 
   return res.send({ accessToken });
-  */
 }
